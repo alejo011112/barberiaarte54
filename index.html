@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbería Arte 54 | Premium Grooming</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Global Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar hidden-onload">
+        <div class="logo">Arte 54.</div>
+        <div class="nav-links">
+            <a href="#servicios">Servicios</a>
+            <a href="#galeria">Galería</a>
+            <a href="#reservas" class="nav-cta">Reservar</a>
+        </div>
+    </nav>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/573015334196?text=Hola%20Arte%2054%2C%20quiero%20agendar%20una%20cita" target="_blank" class="floating-wa">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.01 2.012C6.506 2.012 2.025 6.494 2.025 11.999c0 1.745.454 3.447 1.32 4.954L2 22l5.228-1.341a9.962 9.962 0 004.782 1.222h.004c5.503 0 9.986-4.483 9.986-9.882 0-2.668-1.038-5.176-2.923-7.062a9.919 9.919 0 00-7.067-2.925zm0 18.232h-.003a8.28 8.28 0 01-4.225-1.155l-.303-.18-3.14.825.84-3.064-.197-.313a8.286 8.286 0 01-1.266-4.464c0-4.57 3.72-8.291 8.294-8.291 2.215 0 4.298.863 5.864 2.428A8.258 8.258 0 0120.304 12c0 4.568-3.718 8.244-8.294 8.244zm4.542-6.196c-.248-.124-1.472-.727-1.7-.811-.228-.083-.394-.124-.56.124-.166.248-.642.811-.787.977-.145.166-.29.186-.538.062-.248-.124-1.05-.387-2-1.233-.74-.658-1.24-1.472-1.385-1.72-.145-.248-.016-.383.108-.507.112-.112.248-.29.373-.435.124-.145.166-.248.248-.414.083-.166.042-.31-.02-.434-.062-.124-.56-1.35-.767-1.85-.2-.49-.404-.424-.56-.432-.145-.008-.31-.008-.476-.008s-.435.062-.663.31c-.228.248-.87 .85-.87 2.072 0 1.222.89 2.402 1.015 2.568.124.166 1.75 2.67 4.24 3.738.592.253 1.054.404 1.415.517.594.188 1.135.161 1.562.098.477-.07 1.472-.601 1.68-1.182.207-.58.207-1.077.145-1.182-.062-.104-.228-.166-.476-.29z" fill="white"/>
+        </svg>
+    </a>
+
+    <!-- Hero Section -->
+    <header class="hero" id="inicio">
+        <div class="hero-bg" style="background-image: url('assets/hero-bg.png');"></div>
+        <div class="hero-content">
+            <h1 class="hero-title hidden-onload delay-1">Arte. Precisión. Estilo.</h1>
+            <p class="hero-subtitle hidden-onload delay-2">Elevando la barbería a un estándar de lujo en Bucaramanga.</p>
+            <div class="hero-buttons hidden-onload delay-3">
+                <a href="#reservas" class="btn btn-primary">Reservar Cita</a>
+            </div>
+            <p class="social-proof hidden-onload delay-4">137K seguidores en TikTok &middot; 100% recomendado en Facebook</p>
+        </div>
+        <div class="scroll-indicator hidden-onload delay-5">
+            <div class="line"></div>
+        </div>
+    </header>
+
+    <!-- Servicios Section -->
+    <section class="servicios" id="servicios">
+        <div class="container">
+            <h2 class="section-title fade-in-scroll">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-card fade-in-scroll">
+                    <div class="card-inner">
+                        <h3>Corte Clásico</h3>
+                        <p class="service-desc">Elegancia atemporal con tijera y precisión milimétrica.</p>
+                        <span class="price">$35.000</span>
+                    </div>
+                </div>
+                <div class="service-card fade-in-scroll">
+                    <div class="card-inner">
+                        <h3>Fade / Degradado</h3>
+                        <p class="service-desc">Transiciones perfectas, desde skin fade hasta low fade.</p>
+                        <span class="price">$40.000</span>
+                    </div>
+                </div>
+                <div class="service-card fade-in-scroll">
+                    <div class="card-inner">
+                        <h3>Diseño de Barba</h3>
+                        <p class="service-desc">Perfilado, hidratación y toalla caliente para un acabado premium.</p>
+                        <span class="price">$25.000</span>
+                    </div>
+                </div>
+                <div class="service-card fade-in-scroll">
+                    <div class="card-inner">
+                        <h3>Combo Corte + Barba</h3>
+                        <p class="service-desc">La experiencia completa Arte 54. Relajación y estilo inigualable.</p>
+                        <span class="price">$60.000</span>
+                    </div>
+                </div>
+                <div class="service-card fade-in-scroll">
+                    <div class="card-inner">
+                        <h3>Diseño de Cejas</h3>
+                        <p class="service-desc">Limpieza y simetría facial con navaja.</p>
+                        <span class="price">$15.000</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galería Section -->
+    <section class="galeria" id="galeria">
+        <div class="container">
+            <h2 class="section-title fade-in-scroll">El Arte en Detalle</h2>
+            <div class="gallery-masonry">
+                <div class="gallery-item fade-in-scroll">
+                    <img src="assets/img/precision.jpeg" loading="lazy" alt="Precisión">
+                    <div class="gallery-overlay">
+                        <span>Precisión</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-scroll">
+                    <img src="assets/img/herramientas.jpeg" loading="lazy" alt="Herramientas">
+                    <div class="gallery-overlay">
+                        <span>Herramientas</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-scroll">
+                    <img src="assets/img/corte-clasico.jpeg" loading="lazy" alt="Corte Clásico">
+                    <div class="gallery-overlay">
+                        <span>Corte Clásico</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-scroll">
+                    <img src="assets/img/atmosfera.jpeg" loading="lazy" alt="Atmósfera">
+                    <div class="gallery-overlay">
+                        <span>Atmósfera</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-scroll">
+                    <img src="assets/img/fade-moderno.jpeg" loading="lazy" alt="Fade Moderno">
+                    <div class="gallery-overlay">
+                        <span>Fade Moderno</span>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in-scroll">
+                    <img src="assets/img/estilo.jpeg" loading="lazy" alt="Estilo">
+                    <div class="gallery-overlay">
+                        <span>Estilo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios Section -->
+    <section class="testimonios" id="testimonios">
+        <div class="container">
+            <h2 class="section-title fade-in-scroll">Lo Que Dicen Nuestros Clientes</h2>
+            
+            <div class="stats-bar fade-in-scroll">
+                <div class="stat-item"><strong>137K</strong> Seguidores en TikTok</div>
+                <div class="stat-item"><strong>1.2M</strong> Likes en TikTok</div>
+                <div class="stat-item"><strong>22</strong> Reseñas 5 estrellas en Facebook</div>
+                <div class="stat-item"><strong>100%</strong> Recomendado</div>
+            </div>
+
+            <div class="carousel-container fade-in-scroll">
+                <div class="carousel-track">
+                    <!-- Original items -->
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Excelente atención y gran profesionalismo. Es un espacio cómodo y muy tranquilo."</p>
+                        <span class="author">— Cliente verificado</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"El servicio es excelente."</p>
+                        <span class="author">— Cliente verificado</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"100% recomendado. Los mejores de Bucaramanga."</p>
+                        <span class="author">— Facebook</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Arte 54 es mi barbería de confianza. Siempre salgo satisfecho."</p>
+                        <span class="author">— Cliente fiel</span>
+                    </div>
+                    <!-- Cloned items for infinite scroll -->
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Excelente atención y gran profesionalismo. Es un espacio cómodo y muy tranquilo."</p>
+                        <span class="author">— Cliente verificado</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"El servicio es excelente."</p>
+                        <span class="author">— Cliente verificado</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"100% recomendado. Los mejores de Bucaramanga."</p>
+                        <span class="author">— Facebook</span>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Arte 54 es mi barbería de confianza. Siempre salgo satisfecho."</p>
+                        <span class="author">— Cliente fiel</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservas Section -->
+    <section class="reservas" id="reservas" style="background-image: url('https://images.unsplash.com/photo-1621605815971-8d54e08e06f4?w=1920&q=80');">
+        <div class="reservas-overlay"></div>
+        <div class="container reservas-cinematic">
+            <span class="reservas-label fade-in-scroll delay-1">&mdash; RESERVAS &mdash;</span>
+            <h2 class="section-title fade-in-scroll delay-2" style="color: white; margin-bottom: var(--spacing-lg);">ASEGURA TU ESPACIO</h2>
+            
+            <div class="reservas-grid fade-in-scroll delay-3">
+                <div class="cal-container">
+                    <!-- Cal inline embed code begins -->
+                    <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-reservar-cita"></div>
+                    <script type="text/javascript">
+                      (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+                    Cal("init", "reservar-cita", {origin:"https://app.cal.com"});
+                      Cal.ns["reservar-cita"]("inline", {
+                        elementOrSelector:"#my-cal-inline-reservar-cita",
+                        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+                        calLink: "alejandro-yanez-bj5uo7/reservar-cita",
+                      });
+                      Cal.ns["reservar-cita"]("ui", {"theme":"dark","cssVarsPerTheme":{"dark":{"cal-brand":"#000000"}},"hideEventTypeDetails":false,"layout":"month_view"});
+                    </script>
+                    <!-- Cal inline embed code ends -->
+                </div>
+                
+                <div class="reserva-cta">
+                    <p style="font-size: 1.5rem; margin-bottom: var(--spacing-md);">Agenda tu cita directamente por WhatsApp</p>
+                    <a href="https://wa.me/573015334196?text=Hola%20Arte%2054%2C%20quiero%20agendar%20una%20cita" target="_blank" class="btn btn-primary">
+                        RESERVAR POR WHATSAPP
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Contacto -->
+    <footer class="footer" id="contacto">
+        <div class="container fade-in-scroll">
+            <div class="footer-brand" style="margin-bottom: var(--spacing-lg);">
+                <h2>Arte 54.</h2>
+                <p>La máxima expresión del cuidado personal masculino.</p>
+            </div>
+            
+            <div class="footer-layout">
+                <div class="footer-map">
+                    <div class="map-wrapper">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.5!2d-73.1198!3d7.1193!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sBarbería%20Arte%2054!5e0!3m2!1ses!2sco!4v1"
+                            width="100%"
+                            height="350"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="map-actions">
+                        <a href="https://maps.google.com/?q=Calle+56+%2328-49,+Sotomayor,+Bucaramanga" target="_blank" class="btn btn-outline map-btn">Cómo llegar</a>
+                        <a href="tel:+573015334196" class="btn btn-outline map-btn">Llamar ahora</a>
+                    </div>
+                </div>
+                
+                <div class="footer-details">
+                    <div class="footer-info">
+                        <h4>Ubicación</h4>
+                        <p>Calle 56 #28-49</p>
+                        <p>Sotomayor, Bucaramanga</p>
+                        <p>(cerca de Patacones)</p>
+                    </div>
+                    <div class="footer-info">
+                        <h4>Atención</h4>
+                        <p>Lunes - Sábado: 9:00 AM - 8:00 PM</p>
+                        <p>Servicio: Local y a domicilio</p>
+                        <p>Áreas: Bucaramanga, Floridablanca, Villaluz</p>
+                    </div>
+                    <div class="footer-social">
+                        <h4>Síguenos</h4>
+                        <a href="https://www.instagram.com/barberiaarte54/" target="_blank">Instagram</a>
+                        <a href="https://www.facebook.com/barberiaarte54/" target="_blank">Facebook</a>
+                        <a href="https://www.tiktok.com/@barberiaarte54" target="_blank">TikTok</a>
+                        <a href="https://wa.me/573015334196?text=Hola%20Arte%2054%2C%20quiero%20agendar%20una%20cita" target="_blank">WhatsApp (301 533 4196)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Barbería Arte 54. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
