@@ -30,6 +30,11 @@ html {
     scroll-behavior: smooth;
 }
 
+section {
+    scroll-margin-top: 80px;
+    padding-top: 100px; /* Asegura que el menú no tape el contenido */
+}
+
 body, a, button, .btn, .gallery-item, .service-card, .floating-wa {
     cursor: none !important;
 }
@@ -39,7 +44,7 @@ body {
     color: var(--color-text);
     font-family: var(--font-primary);
     line-height: 1.6;
-    overflow-x: hidden;
+    overflow-x: hidden; /* Elimina scroll horizontal global */
 }
 
 #particleCanvas {
@@ -125,21 +130,13 @@ a {
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-/* Animations */
+/* Entrance animation initial states — controlled by GSAP */
 .hidden-onload {
     opacity: 0;
-    transform: translateY(30px);
 }
 
 .fade-in-scroll {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.fade-in-scroll.is-visible {
-    opacity: 1;
-    transform: translateY(0);
 }
 
 /* ==========================================================================
@@ -154,15 +151,48 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1; /* Match requested z-index */
+    z-index: 1000; /* Asegura que el menú esté por encima de todo */
     transition: var(--transition-slow);
-    mix-blend-mode: difference;
+    /* mix-blend-mode removed so the logo PNG colors are preserved */
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: 800;
-    letter-spacing: -0.05em;
+    display: flex;
+    align-items: center;
+    line-height: 0;
+    padding: 8px 0;
+    transition: transform var(--transition-fast);
+}
+
+.logo:hover .logo-img {
+    animation-duration: 1.5s; /* Acelera al hacer hover */
+    filter:
+        drop-shadow(0 0 10px rgba(212, 175, 55, 0.9))
+        drop-shadow(0 0 22px rgba(212, 175, 55, 0.6));
+}
+
+.logo-img {
+    max-height: 120px;
+    height: auto;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    /* Animación de brillo dorado pulsante */
+    animation: logoGlow 3.5s ease-in-out infinite;
+}
+
+@keyframes logoGlow {
+    0%, 100% {
+        filter:
+            drop-shadow(0 0 4px  rgba(212, 175, 55, 0.25))
+            drop-shadow(0 0 10px rgba(212, 175, 55, 0.10));
+    }
+    50% {
+        filter:
+            drop-shadow(0 0 10px rgba(212, 175, 55, 0.75))
+            drop-shadow(0 0 24px rgba(212, 175, 55, 0.40))
+            drop-shadow(0 0 40px rgba(255, 220, 100, 0.20));
+    }
 }
 
 .nav-links {
@@ -596,12 +626,57 @@ a {
     }
 }
 
+/* Contenedor externo: solo layout, sin decoración propia */
 .cal-container {
-    min-height: 600px;
     width: 100%;
-    background-color: var(--color-surface);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Tarjeta flotante glassmorphism que envuelve el iframe */
+.cal-glass-wrapper {
+    width: 95%;
+    max-width: 900px;
+    min-height: 680px;
+    margin: 0 auto;
+
+    /* Glassmorphism */
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    /* Bordes y forma de tarjeta */
+    border-radius: 20px;
+    border: 1px solid rgba(255, 215, 0, 0.3); /* borde dorado fino */
+
+    /* Sombra flotante */
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 215, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+
+    overflow: hidden; /* Respeta el border-radius en el iframe */
+    box-sizing: border-box;
+
+    /* Transición suave por si cambia tamaño */
+    transition: box-shadow 0.4s ease;
+}
+
+.cal-glass-wrapper:hover {
+    box-shadow:
+        0 12px 48px rgba(0, 0, 0, 0.7),
+        0 0 0 1px rgba(255, 215, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Nodo raíz que Cal.com utiliza como ancla del iframe */
+#my-cal-inline-reservar-cita {
+    width: 100%;
+    min-height: 680px;
+    background-color: #000000; /* Modo oscuro forzado */
 }
 
 .reserva-cta {
@@ -618,12 +693,7 @@ a {
     color: var(--color-text);
 }
 
-.delay-1 { transition-delay: 0.15s !important; }
-.delay-2 { transition-delay: 0.30s !important; }
-.delay-3 { transition-delay: 0.45s !important; }
-.delay-4 { transition-delay: 0.60s !important; }
-.delay-5 { transition-delay: 0.75s !important; }
-.delay-6 { transition-delay: 0.90s !important; }
+/* Delay classes removed — GSAP handles stagger/delays */
 
 /* ==========================================================================
    Footer
@@ -748,3 +818,93 @@ a {
     width: 35px;
     height: 35px;
 }
+
+/* ==========================================================================
+   Mobile Responsiveness (Max 480px)
+   ========================================================================== */
+@media (max-width: 480px) {
+    /* 1. Navbar */
+    .navbar { padding: 15px; }
+    .logo-img { max-height: 80px; height: auto; } /* Compacto en móvil */
+    .nav-links { gap: 10px; font-size: 0.7rem; }
+
+    /* 2. Stats bar (testimonios) */
+    .stats-bar { 
+        display: grid; 
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        padding: 40px 20px;
+    }
+
+    /* 3. Servicios cards */
+    .service-card { padding: 30px 20px; }
+
+    /* 4. Botón WhatsApp reservas */
+    .reserva-cta .btn, .whatsapp-cta-btn { 
+        padding: 15px 30px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+
+    /* 5. Galería */
+    .gallery-masonry, .gallery-grid { grid-template-columns: 1fr; }
+
+    /* 6. Footer botones "Cómo llegar" y "Llamar ahora" */
+    .map-actions, .footer-buttons { 
+        flex-direction: column;
+        width: 100%;
+    }
+    .map-actions a, .footer-buttons a { 
+        width: 100%; 
+        text-align: center; 
+    }
+}
+
+/* ==========================================================================
+   Cursor Removal (Max 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    #cursor,
+    .cursor,
+    [class*="cursor"] {
+        display: none !important;
+        opacity: 0 !important;
+        visibility: hidden !important;
+    }
+    
+    body, * {
+        cursor: auto !important;
+    }
+}
+
+/* ==========================================================================
+   Cal.com — CENTRADO MATEMÁTICO IPHONE SE (375px)
+   ========================================================================== */
+@media (max-width: 480px) {
+    body {
+        overflow-x: hidden !important;
+        width: 100vw !important;
+    }
+
+    .cal-container {
+        width: 100% !important;
+        overflow: hidden !important;
+        display: flex !important;
+        justify-content: center !important;
+        position: relative;
+    }
+
+    .cal-container iframe {
+        width: 420px !important;
+        min-width: 420px !important;
+        transform: scale(0.85) !important;
+        transform-origin: center top !important;
+        flex-shrink: 0 !important;
+        margin-left: -22px !important;
+        border: none !important;
+    }
+}
+
+
+
+

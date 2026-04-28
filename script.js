@@ -6,10 +6,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const cursor = document.querySelector('.cursor');
     const links = document.querySelectorAll('a, .btn, .gallery-item, .service-card');
 
-    document.addEventListener('mousemove', (e) => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-    });
+    if (window.innerWidth > 768) {
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+    }
 
     links.forEach(link => {
         link.addEventListener('mouseenter', () => {
@@ -20,43 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    /* ==========================================================================
-       Initial Load Animations
-       ========================================================================== */
-    setTimeout(() => {
-        document.querySelector('.navbar').style.opacity = 1;
-        document.querySelector('.navbar').style.transform = 'translateY(0)';
-        
-        const heroElements = document.querySelectorAll('.hero .hidden-onload');
-        heroElements.forEach((el, index) => {
-            setTimeout(() => {
-                el.style.opacity = 1;
-                el.style.transform = 'translateY(0)';
-                el.style.transition = 'opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1)';
-            }, 300 + (index * 200));
-        });
-    }, 100);
-
-    /* ==========================================================================
-       Intersection Observer for Scroll Animations
-       ========================================================================== */
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target); // Stop observing once animated
-            }
-        });
-    }, observerOptions);
-
-    const fadeElements = document.querySelectorAll('.fade-in-scroll');
-    fadeElements.forEach(el => observer.observe(el));
+    /* Intersection observer no longer needed — GSAP ScrollTrigger handles scroll animations */
 
     /* ==========================================================================
        Parallax Effect for Hero Section
@@ -264,3 +230,115 @@ document.addEventListener("DOMContentLoaded", () => {
         initParticles();
     });
 });
+
+/* ==========================================================================
+   GSAP Animations
+   ========================================================================== */
+gsap.registerPlugin(ScrollTrigger);
+
+// Navbar reveal
+gsap.fromTo('.navbar',
+  { opacity: 0, y: -30 },
+  { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.1 }
+);
+
+// Hero — staggered entrance
+gsap.fromTo('.hero-title',
+  { opacity: 0, y: 120 },
+  { opacity: 1, y: 0, duration: 1.2, ease: 'power4.out', delay: 0.3 }
+);
+gsap.fromTo('.hero-subtitle',
+  { opacity: 0, y: 80 },
+  { opacity: 1, y: 0, duration: 1.1, ease: 'power4.out', delay: 0.55 }
+);
+gsap.fromTo('.hero-buttons',
+  { opacity: 0, y: 60 },
+  { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.75 }
+);
+gsap.fromTo('.social-proof',
+  { opacity: 0, y: 40 },
+  { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.95 }
+);
+gsap.fromTo('.scroll-indicator',
+  { opacity: 0 },
+  { opacity: 1, duration: 1, ease: 'power2.out', delay: 1.3 }
+);
+
+// Section titles (fade-in-scroll)
+gsap.utils.toArray('.section-title.fade-in-scroll').forEach(el => {
+  gsap.fromTo(el,
+    { opacity: 0, y: 50 },
+    { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: el, start: 'top 80%' }
+    }
+  );
+});
+
+// Servicios — service cards
+gsap.fromTo('.service-card',
+  { opacity: 0, y: 80 },
+  { opacity: 1, y: 0, duration: 0.8, stagger: 0.18, ease: 'power3.out',
+    scrollTrigger: { trigger: '#servicios', start: 'top 70%' }
+  }
+);
+
+// Galería — gallery images
+gsap.fromTo('.gallery-item img',
+  { opacity: 0, scale: 0.85 },
+  { opacity: 1, scale: 1, duration: 0.7, stagger: 0.1, ease: 'power2.out',
+    scrollTrigger: { trigger: '#galeria', start: 'top 70%' }
+  }
+);
+
+// Galería — gallery item containers
+gsap.fromTo('.gallery-item',
+  { opacity: 0, y: 40 },
+  { opacity: 1, y: 0, duration: 0.7, stagger: 0.1, ease: 'power2.out',
+    scrollTrigger: { trigger: '#galeria', start: 'top 70%' }
+  }
+);
+
+// Testimonios — stats bar
+gsap.fromTo('.stats-bar',
+  { opacity: 0, y: 40 },
+  { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: '#testimonios', start: 'top 75%' }
+  }
+);
+
+// Testimonios — carousel
+gsap.fromTo('.carousel-container',
+  { opacity: 0, y: 40 },
+  { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '#testimonios', start: 'top 65%' }
+  }
+);
+
+// Reservas section label + title
+gsap.fromTo('.reservas-label',
+  { opacity: 0, y: 30 },
+  { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out',
+    scrollTrigger: { trigger: '#reservar', start: 'top 75%' }
+  }
+);
+gsap.fromTo('#reservar .section-title',
+  { opacity: 0, y: 50 },
+  { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', delay: 0.15,
+    scrollTrigger: { trigger: '#reservar', start: 'top 75%' }
+  }
+);
+gsap.fromTo('.reservas-grid',
+  { opacity: 0, y: 60 },
+  { opacity: 1, y: 0, duration: 1, ease: 'power3.out', delay: 0.3,
+    scrollTrigger: { trigger: '#reservar', start: 'top 70%' }
+  }
+);
+
+// Footer
+gsap.fromTo('.footer .container',
+  { opacity: 0, y: 50 },
+  { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out',
+    scrollTrigger: { trigger: '#contacto', start: 'top 80%' }
+  }
+);
+

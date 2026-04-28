@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barbería Arte 54 | Premium Grooming</title>
+    <title>Barbería Arte 54 | Reservas & Estilo en Bucaramanga</title>
+    <meta name="description" content="Agenda tu cita en la mejor barbería de Bucaramanga. Estilo, precisión y el mejor ambiente.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/img/logo-sin-fondo.png">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="Barbería Arte 54">
+    <meta property="og:description" content="Reserva tu corte online de forma rápida y sencilla.">
+    <meta property="og:image" content="assets/img/logo-sin-fondo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
     <!-- Global Particle Canvas -->
@@ -18,11 +30,13 @@
 
     <!-- Navigation -->
     <nav class="navbar hidden-onload">
-        <div class="logo">Arte 54.</div>
+        <a href="#inicio" class="logo" aria-label="Barbería Arte 54 - Inicio">
+            <img src="assets/img/logo-sin-fondo.png" alt="Logo Barbería Arte 54" class="logo-img">
+        </a>
         <div class="nav-links">
-            <a href="#servicios">Servicios</a>
-            <a href="#galeria">Galería</a>
-            <a href="#reservas" class="nav-cta">Reservar</a>
+            <a href="#servicios" class="nav-link">SERVICIOS</a>
+            <a href="#galeria" class="nav-link">GALERÍA</a>
+            <a href="#reservar" class="nav-link">RESERVAR</a>
         </div>
     </nav>
 
@@ -40,7 +54,7 @@
             <h1 class="hero-title hidden-onload delay-1">Arte. Precisión. Estilo.</h1>
             <p class="hero-subtitle hidden-onload delay-2">Elevando la barbería a un estándar de lujo en Bucaramanga.</p>
             <div class="hero-buttons hidden-onload delay-3">
-                <a href="#reservas" class="btn btn-primary">Reservar Cita</a>
+                <a href="#reservar" class="btn btn-primary">RESERVAR CITA</a>
             </div>
             <p class="social-proof hidden-onload delay-4">137K seguidores en TikTok &middot; 100% recomendado en Facebook</p>
         </div>
@@ -200,7 +214,7 @@
     </section>
 
     <!-- Reservas Section -->
-    <section class="reservas" id="reservas" style="background-image: url('https://images.unsplash.com/photo-1621605815971-8d54e08e06f4?w=1920&q=80');">
+    <section class="reservas" id="reservar" style="background-image: url('https://images.unsplash.com/photo-1621605815971-8d54e08e06f4?w=1920&q=80');">
         <div class="reservas-overlay"></div>
         <div class="container reservas-cinematic">
             <span class="reservas-label fade-in-scroll delay-1">&mdash; RESERVAS &mdash;</span>
@@ -209,16 +223,17 @@
             <div class="reservas-grid fade-in-scroll delay-3">
                 <div class="cal-container">
                     <!-- Cal inline embed code begins -->
-                    <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline-reservar-cita"></div>
+                    <div id="my-cal-inline-reservar-cita"></div>
                     <script type="text/javascript">
                       (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
                     Cal("init", "reservar-cita", {origin:"https://app.cal.com"});
+                      const isMobile = window.innerWidth <= 768;
                       Cal.ns["reservar-cita"]("inline", {
                         elementOrSelector:"#my-cal-inline-reservar-cita",
-                        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"dark"},
+                        config: {"layout": isMobile ? "week_view" : "month_view","theme":"dark"},
                         calLink: "alejandro-yanez-bj5uo7/reservar-cita",
                       });
-                      Cal.ns["reservar-cita"]("ui", {"theme":"dark","cssVarsPerTheme":{"dark":{"cal-brand":"#000000"}},"hideEventTypeDetails":false,"layout":"month_view"});
+                      Cal.ns["reservar-cita"]("ui", {"theme":"dark","cssVarsPerTheme":{"dark":{"cal-brand":"#000000"}},"hideEventTypeDetails":false,"layout": isMobile ? "week_view" : "month_view"});
                     </script>
                     <!-- Cal inline embed code ends -->
                 </div>
